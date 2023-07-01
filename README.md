@@ -16,7 +16,8 @@ O projeto possui a seguinte estrutura de diretórios:
 │   │   ├── Calculadora.java
 │   │   └── Numero.java
 │   └── classes
-│       ├── CalculadoraImpl.java
+│       ├── CalculadoraImplAvancada.java
+│       ├── CalculadoraImplBasica.java
 │       └── NumeroImpl.java
 └── README.md
 ```
@@ -24,9 +25,9 @@ O projeto possui a seguinte estrutura de diretórios:
 - O diretório `client` contém o arquivo `ClienteCalculadora.java`, responsável pela implementação do cliente que faz as chamadas à calculadora remota.
 - O diretório `server` contém o arquivo `ServidorCalculadora.java`, responsável pela implementação do servidor que disponibiliza os métodos da calculadora remotamente.
 - O diretório `interfaces` contém as interfaces `Calculadora.java` e `Numero.java`, que definem os métodos disponíveis na calculadora e a interface para representar um número.
-- O diretório `classes` contém as classes de implementação `CalculadoraImpl.java` e `NumeroImpl.java`, que são as implementações concretas das interfaces.
+- O diretório `classes` contém as classes de implementação `CalculadoraImplAvancada.java`, `CalculadoraImplBasica.java` e `NumeroImpl.java`, que são as implementações concretas das interfaces.
 
-### Executando o Projeto
+### Executando o Projeto (Geral)
 
 Para executar o projeto, siga os passos abaixo:
 
@@ -45,23 +46,21 @@ rmiregistry
 1. Execute o servidor:
 
 ```shell
-java -classpath bin server.ServidorCalculadora
+java -classpath bin server.ServidorCalculadora <nome_servidor>
 ```
 
 1. Execute o cliente:
 
 ```shell
-java -classpath bin client.ClienteCalculadora
+java -classpath bin client.ClienteCalculadora <nome_repositorio>
 ```
-
-Após seguir esses passos, o cliente irá se conectar ao servidor, realizará algumas operações de exemplo e exibirá os resultados obtidos.
 
 ### Customização da Calculadora
 
 Caso deseje adicionar novas operações ou funcionalidades à calculadora, siga os passos abaixo:
 
 1. Edite a interface `Calculadora.java` presente no diretório `interfaces` e adicione os métodos desejados.
-2. Implemente os novos métodos na classe `CalculadoraImpl.java` presente no diretório `classes`.
+2. Implemente os novos métodos na classe `CalculadoraImplAvancada.java` presente no diretório `classes`.
 3. No cliente, chame os novos métodos da calculadora de acordo com as necessidades do projeto.
 
 ### Considerações Finais

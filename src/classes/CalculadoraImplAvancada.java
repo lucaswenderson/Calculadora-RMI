@@ -9,10 +9,10 @@ import interfaces.Numero;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CalculadoraImpl extends UnicastRemoteObject implements Calculadora {
+public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calculadora {
     private String nomeRepositorio;
 
-    public CalculadoraImpl(String nomeRepositorio) throws RemoteException {
+    public CalculadoraImplAvancada(String nomeRepositorio) throws RemoteException {
         super();
         this.nomeRepositorio = nomeRepositorio;
     }

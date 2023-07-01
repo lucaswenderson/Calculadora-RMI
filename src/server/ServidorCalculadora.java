@@ -3,7 +3,8 @@ package server;
 import java.rmi.registry.Registry;
 import java.rmi.registry.LocateRegistry;
 
-import classes.CalculadoraImpl;
+import classes.CalculadoraImplAvancada;
+import classes.CalculadoraImplBasica;
 
 public class ServidorCalculadora {
     public static void main(String args[]) {
@@ -19,15 +20,15 @@ public class ServidorCalculadora {
             GerenciadorRepositorios gerenciador = new GerenciadorRepositorios();
 
             // Cria uma instância do repositório de métodos para o servidor atual
-            CalculadoraImpl calculadoraBasica = new CalculadoraImpl("Operações Básicas");
-            CalculadoraImpl calculadoraAvancada = new CalculadoraImpl("Operações Avançadas");
+            CalculadoraImplBasica calculadoraBasica = new CalculadoraImplBasica("CalculadoraBasica");
+            CalculadoraImplAvancada calculadoraAvancada = new CalculadoraImplAvancada("CalculadoraAvancada");
 
             // Registra a instância do repositório no gerenciador
-            gerenciador.registrarRepositorio("Operações Básicas", calculadoraBasica);
-            gerenciador.registrarRepositorio("Operações Avançadas", calculadoraAvancada);
+            gerenciador.registrarRepositorio("CalculadoraBasica", calculadoraBasica);
+            gerenciador.registrarRepositorio("CalculadoraAvancada", calculadoraAvancada);
 
             // Cria e exporta o registro RMI
-            Registry registry = LocateRegistry.createRegistry(1099);
+            Registry registry = LocateRegistry.createRegistry(1234);
 
             // Vincula o gerenciador de repositórios ao registro RMI
             registry.rebind("GerenciadorRepositorios", gerenciador);

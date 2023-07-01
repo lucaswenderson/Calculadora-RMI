@@ -14,15 +14,24 @@ import server.GerenciadorRepositorios;
 
 public class ClienteCalculadora {
     public static void main(String[] args) {
+
+        if (args.length < 1) {
+            System.out.println("Uso: java ClienteCalculadora <nome_repositorio>");
+            System.out.println("Opções <nome_repositorio>: 'CalculadoraBasica' ou 'CalculadoraAvancada'");
+            System.exit(1);
+        }
+        
+        String repositorio = args[0];
+
         try {
             // Localiza o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
+            Registry registry = LocateRegistry.getRegistry("localhost", 1234);
 
             // Obtém referência ao gerenciador de repositórios
             GerenciadorRepositorios gerenciador = (GerenciadorRepositorios) registry.lookup("GerenciadorRepositorios");
 
             // Obtém referência ao repositório de métodos
-            Calculadora calculadora = gerenciador.obterRepositorio("Operaçoes Avançadas");
+            Calculadora calculadora = gerenciador.obterRepositorio(repositorio);
 
             // Examinar nome do repositório e número de métodos
             String nomeRepositorio = calculadora.getRepositoryName();
@@ -51,7 +60,7 @@ public class ClienteCalculadora {
                 //Verificar se o método tem um ou dois parâmetros
                 Method metodo;
                 int numeroParametros;
-                if (metodoEscolhido.equals("Raiz Quadrada") || metodoEscolhido.equals("Logaritmo")) {
+                if (metodoEscolhido.equals("RaizQuadrada") || metodoEscolhido.equals("Logaritmo")) {
                     numeroParametros = 1;
                     metodo = calculadora.getClass().getMethod(metodoEscolhido, Numero.class);
                 } else {
@@ -63,19 +72,19 @@ public class ClienteCalculadora {
                 List<Numero> parametros = new ArrayList<>();
                 for (int i = 0; i < numeroParametros; i++) {
                     System.out.print("Digite o valor do parâmetro " + (i + 1) + ": ");
-                    Numero parametro = new NumeroImpl(scanner.nextInt());
+                    Numero parametro = new NumeroImpl(scanner.nextDouble());
                     parametros.add(parametro);
                 }                
                 
                 //Invocar o método
-                Numero resultado;
+                double resultado;
                 if (numeroParametros == 2) {
                     Numero parametro1 = parametros.get(0);
                     Numero parametro2 = parametros.get(1);
-                    resultado = (Numero) metodo.invoke(calculadora, parametro1, parametro2);
+                    resultado = ((Numero) metodo.invoke(calculadora, parametro1, parametro2)).getValor();
                 } else {
                     Numero parametro = parametros.get(0);
-                    resultado = (Numero) metodo.invoke(calculadora, parametro);
+                    resultado = ((Numero) metodo.invoke(calculadora, parametro)).getValor();
                 }
 
                 System.out.println("Resultado: " + resultado);

@@ -1,12 +1,14 @@
 package server;
 
+import java.io.Serializable;
 import java.rmi.Remote;
 import java.util.HashMap;
 import java.util.Map;
 
 import interfaces.Calculadora;
 
-public class GerenciadorRepositorios implements Remote {
+public class GerenciadorRepositorios implements Remote, Serializable {
+    private static final long serialVersionUID = 1L;
     private Map<String, Calculadora> repositorios;
 
     public GerenciadorRepositorios() {

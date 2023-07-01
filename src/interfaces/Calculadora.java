@@ -15,6 +15,7 @@ public interface Calculadora extends Remote {
 
     Numero Divisao(Numero a, Numero b) throws RemoteException;
 
+
     //Implementação pessoal 
     Numero Potencia(Numero base, Numero expoente) throws RemoteException;
 
@@ -23,6 +24,7 @@ public interface Calculadora extends Remote {
     Numero Logaritmo(Numero numero) throws RemoteException;
 
     Numero Porcentagem(Numero valor, Numero porcentagem) throws RemoteException;
+    
 
     //Repository    
     String getRepositoryName() throws RemoteException;
