@@ -2,26 +2,34 @@ package interfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 
 public interface Calculadora extends Remote {
     //Pre implementado
-    Numero soma(Numero a, Numero b) throws RemoteException;
+    Numero Soma(Numero a, Numero b) throws RemoteException;
 
-    Numero subtracao(Numero a, Numero b) throws RemoteException;
+    Numero Subtracao(Numero a, Numero b) throws RemoteException;
 
-    Numero multiplicacao(Numero a, Numero b) throws RemoteException;
+    Numero Multiplicacao(Numero a, Numero b) throws RemoteException;
 
-    Numero divisao(Numero a, Numero b) throws RemoteException;
+    Numero Divisao(Numero a, Numero b) throws RemoteException;
 
     //Implementação pessoal 
-    Numero potencia(Numero base, Numero expoente) throws RemoteException;
+    Numero Potencia(Numero base, Numero expoente) throws RemoteException;
 
-    Numero raizQuadrada(Numero numero) throws RemoteException;
+    Numero RaizQuadrada(Numero numero) throws RemoteException;
 
-    Numero logaritmo(Numero numero) throws RemoteException;
+    Numero Logaritmo(Numero numero) throws RemoteException;
 
-    Numero porcentagem(Numero valor, Numero porcentagem) throws RemoteException;
+    Numero Porcentagem(Numero valor, Numero porcentagem) throws RemoteException;
+
+    //Repository    
+    String getRepositoryName() throws RemoteException;
+
+    int getMethodCount() throws RemoteException;
+
+    List<String> listMetodos() throws RemoteException;
 
 
 }

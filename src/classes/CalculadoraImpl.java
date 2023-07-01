@@ -1,25 +1,61 @@
 package classes;
 
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
+
 import interfaces.Calculadora;
 import interfaces.Numero;
 
-public class CalculadoraImpl implements Calculadora {
-    public Numero soma(Numero a, Numero b)  {
+import java.util.ArrayList;
+import java.util.List;
+
+public class CalculadoraImpl extends UnicastRemoteObject implements Calculadora {
+    private String nomeRepositorio;
+
+    public CalculadoraImpl(String nomeRepositorio) throws RemoteException {
+        super();
+        this.nomeRepositorio = nomeRepositorio;
+    }
+
+    //Repository
+    public String getRepositoryName() throws RemoteException {
+        return nomeRepositorio; 
+    }
+    
+    public List<String> listMetodos() throws RemoteException {
+        List<String> metodos = new ArrayList<>();
+        metodos.add("Soma");
+        metodos.add("Subtracao");
+        metodos.add("Multiplicacao");
+        metodos.add("Divisao");
+        metodos.add("Porcentagem");
+        metodos.add("Potencia");
+        metodos.add("RaizQuadrada");
+        metodos.add("Logaritmo");
+        return metodos;
+    }
+
+    public int getMethodCount() throws RemoteException {
+        return listMetodos().size(); 
+    }
+
+    //Operações
+    public Numero Soma(Numero a, Numero b)  {
         double resultado = a.getValor() + b.getValor();
         return new NumeroImpl(resultado);
     }
 
-    public Numero subtracao(Numero a, Numero b)  {
+    public Numero Subtracao(Numero a, Numero b)  {
         double resultado = a.getValor() - b.getValor();
         return new NumeroImpl(resultado);
     }
 
-    public Numero multiplicacao(Numero a, Numero b)  {
+    public Numero Multiplicacao(Numero a, Numero b)  {
         double resultado = a.getValor() * b.getValor();
         return new NumeroImpl(resultado);
     }
 
-    public Numero divisao(Numero a, Numero b) {
+    public Numero Divisao(Numero a, Numero b) {
         double divisor = b.getValor();
         try {
             if (divisor == 0) {
@@ -33,27 +69,25 @@ public class CalculadoraImpl implements Calculadora {
         return new NumeroImpl(0);
     }
 
-    public Numero potencia(Numero base, Numero expoente) {
+    public Numero Potencia(Numero base, Numero expoente) {
         double resultado = Math.pow(base.getValor(), expoente.getValor());
         return new NumeroImpl(resultado);
     }
 
-    public Numero raizQuadrada(Numero numero) {
-        double resultado = Math.sqrt(numero.getValor());
-        return new NumeroImpl(resultado);
-    }
-
-    public Numero logaritmo(Numero numero) {
-        double resultado = Math.log(numero.getValor());
-        return new NumeroImpl(resultado);
-    }
-
-    public Numero porcentagem(Numero valor, Numero porcentagem) {
+    public Numero Porcentagem(Numero valor, Numero porcentagem) {
         double resultado = (porcentagem.getValor() / 100) * valor.getValor();
         return new NumeroImpl(resultado);
     }
 
+    public Numero RaizQuadrada(Numero numero) {
+        double resultado = Math.sqrt(numero.getValor());
+        return new NumeroImpl(resultado);
+    }
 
+    public Numero Logaritmo(Numero numero) {
+        double resultado = Math.log(numero.getValor());
+        return new NumeroImpl(resultado);
+    }
 
 
 

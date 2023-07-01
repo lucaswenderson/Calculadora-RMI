@@ -1,46 +1,93 @@
 package client;
 
+import java.lang.reflect.Method;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 import classes.NumeroImpl;
 import interfaces.Calculadora;
 import interfaces.Numero;
+import server.GerenciadorRepositorios;
 
 public class ClienteCalculadora {
     public static void main(String[] args) {
         try {
             // Localiza o registro RMI
-            Registry registry = LocateRegistry.getRegistry(null);
-            // Consulta o registro e obtém o stub para o objeto remoto
-            Calculadora calc = (Calculadora) registry.lookup("calculadora");
+            Registry registry = LocateRegistry.getRegistry("localhost", 1099);
 
-            // Realiza operações de cálculo remoto
-            Numero num1 = new NumeroImpl(5);
-            Numero num2 = new NumeroImpl(2);
-            Numero soma = calc.soma(num1, num2);
-            Numero subtracao = calc.subtracao(num1, num2);
-            Numero multiplicacao = calc.multiplicacao(num1, num2);
-            Numero divisao = calc.divisao(num1, num2);
-            Numero potencia = calc.potencia(num1, num2);
-            Numero raizQuadrada = calc.raizQuadrada(num1);
-            Numero logaritmo = calc.logaritmo(num1);
-            Numero porcentagem = calc.porcentagem(num1, num2);
+            // Obtém referência ao gerenciador de repositórios
+            GerenciadorRepositorios gerenciador = (GerenciadorRepositorios) registry.lookup("GerenciadorRepositorios");
 
-            // Exibe os resultados obtidos do servidor
-            System.out.println("Resultados obtidos do servidor:");
-            System.out.println("Soma: " + soma.getValor());
-            System.out.println("Subtração: " + subtracao.getValor());
-            System.out.println("Multiplicação: " + multiplicacao.getValor());
-            System.out.println("Divisão: " + divisao.getValor());
-            System.out.println("Potencia: " + potencia.getValor());
-            System.out.println("Raiz Quadrada: " + raizQuadrada.getValor());
-            System.out.println("Logaritmo: " + logaritmo.getValor());
-            System.out.println("Porcentagem: " + porcentagem.getValor());
+            // Obtém referência ao repositório de métodos
+            Calculadora calculadora = gerenciador.obterRepositorio("Operaçoes Avançadas");
 
+            // Examinar nome do repositório e número de métodos
+            String nomeRepositorio = calculadora.getRepositoryName();
+            int numMetodos = calculadora.getMethodCount();
+            System.out.println("Nome do Repositório: " + nomeRepositorio);
+            System.out.println("Número de Métodos: " + numMetodos);
+
+            // Listar os métodos no repositório
+            List<String> metodos = calculadora.listMetodos();
+            System.out.println("Métodos Disponíveis:");
+            for (int i = 0; i < metodos.size(); i++) {
+                System.out.println((i + 1) + ". " + metodos.get(i));
+            }
+
+            // Buscar um método por código de método e parâmetros
+            Scanner scanner = new Scanner(System.in);
             
+            // Solicitar ao usuário a escolha de um método
+            System.out.print("Escolha o número do método desejado: ");
+            int numMetodo = scanner.nextInt();
+
+            if (numMetodo >= 1 && numMetodo <= metodos.size()) {
+                String metodoEscolhido = metodos.get(numMetodo - 1);
+                System.out.println("Método escolhido: " + metodoEscolhido);
+
+                //Verificar se o método tem um ou dois parâmetros
+                Method metodo;
+                int numeroParametros;
+                if (metodoEscolhido.equals("Raiz Quadrada") || metodoEscolhido.equals("Logaritmo")) {
+                    numeroParametros = 1;
+                    metodo = calculadora.getClass().getMethod(metodoEscolhido, Numero.class);
+                } else {
+                    numeroParametros = 2;
+                    metodo = calculadora.getClass().getMethod(metodoEscolhido, Numero.class, Numero.class);
+                }
+
+                //Solicitar ao usuário os parâmetros
+                List<Numero> parametros = new ArrayList<>();
+                for (int i = 0; i < numeroParametros; i++) {
+                    System.out.print("Digite o valor do parâmetro " + (i + 1) + ": ");
+                    Numero parametro = new NumeroImpl(scanner.nextInt());
+                    parametros.add(parametro);
+                }                
+                
+                //Invocar o método
+                Numero resultado;
+                if (numeroParametros == 2) {
+                    Numero parametro1 = parametros.get(0);
+                    Numero parametro2 = parametros.get(1);
+                    resultado = (Numero) metodo.invoke(calculadora, parametro1, parametro2);
+                } else {
+                    Numero parametro = parametros.get(0);
+                    resultado = (Numero) metodo.invoke(calculadora, parametro);
+                }
+
+                System.out.println("Resultado: " + resultado);
+            } else {
+                System.out.println("Opção inválida. Encerrando o programa.");
+            }
+
+            scanner.close();
+
         } catch (Exception e) {
-            System.err.println("Ocorreu um erro no cliente: " + e.toString());
+            System.err.println("Erro: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
