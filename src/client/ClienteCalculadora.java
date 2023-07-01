@@ -60,7 +60,14 @@ public class ClienteCalculadora {
                 //Verificar se o método tem um ou dois parâmetros
                 Method metodo;
                 int numeroParametros;
-                if (metodoEscolhido.equals("RaizQuadrada") || metodoEscolhido.equals("Logaritmo")) {
+                if (metodoEscolhido.equals("RaizQuadrada") ||
+                        metodoEscolhido.equals("Logaritmo") ||
+                        metodoEscolhido.equals("Seno") ||
+                        metodoEscolhido.equals("Cosseno") ||
+                        metodoEscolhido.equals("Tangente") ||
+                        metodoEscolhido.equals("Modulo") ||
+                        metodoEscolhido.equals("Fatorial")
+                    ) {
                     numeroParametros = 1;
                     metodo = calculadora.getClass().getMethod(metodoEscolhido, Numero.class);
                 } else {

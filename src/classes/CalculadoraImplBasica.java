@@ -66,6 +66,10 @@ public class CalculadoraImplBasica extends UnicastRemoteObject implements Calcul
     }
 
     //Métodos avançados não suportados implementados apenas para satisfazer a interface
+    public Numero Exponencial(Numero base, Numero expoente) {
+        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
+    }
+    
     public Numero Potencia(Numero base, Numero expoente) {
         throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
     }
@@ -81,4 +85,24 @@ public class CalculadoraImplBasica extends UnicastRemoteObject implements Calcul
     public Numero Logaritmo(Numero numero) {
         throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
     }
+
+    public Numero Seno(Numero numero) {
+        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
+    }
+    
+    public Numero Cosseno(Numero numero){
+        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
+    }
+    
+    public Numero Tangente(Numero numero){
+        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
+    }
+    
+    public Numero Modulo(Numero numero) {
+        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
+    }
+    
+    public Numero Fatorial(Numero numero){
+        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
+    };
 }

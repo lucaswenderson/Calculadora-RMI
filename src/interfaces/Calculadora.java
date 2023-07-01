@@ -17,13 +17,25 @@ public interface Calculadora extends Remote {
 
 
     //Implementação pessoal 
-    Numero Potencia(Numero base, Numero expoente) throws RemoteException;
-
-    Numero RaizQuadrada(Numero numero) throws RemoteException;
-
-    Numero Logaritmo(Numero numero) throws RemoteException;
-
+    Numero Potencia(Numero base, Numero expoente) throws RemoteException;    
+    
     Numero Porcentagem(Numero valor, Numero porcentagem) throws RemoteException;
+    
+    Numero Exponencial(Numero base, Numero expoente) throws RemoteException;
+    
+    Numero Seno(Numero numero) throws RemoteException;
+    
+    Numero Cosseno(Numero numero) throws RemoteException;
+    
+    Numero Tangente(Numero numero) throws RemoteException;
+    
+    Numero Modulo(Numero numero) throws RemoteException;
+    
+    Numero Fatorial(Numero numero) throws RemoteException;
+    
+    Numero RaizQuadrada(Numero numero) throws RemoteException;
+    
+    Numero Logaritmo(Numero numero) throws RemoteException;
     
 
     //Repository    

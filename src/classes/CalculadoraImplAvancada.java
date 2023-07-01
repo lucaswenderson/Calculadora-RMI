@@ -32,6 +32,12 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
         metodos.add("Potencia");
         metodos.add("RaizQuadrada");
         metodos.add("Logaritmo");
+        metodos.add("Exponencial");
+        metodos.add("Seno");
+        metodos.add("Cosseno");
+        metodos.add("Tangente");
+        metodos.add("Modulo");
+        metodos.add("Fatorial");
         return metodos;
     }
 
@@ -69,6 +75,7 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
         return new NumeroImpl(0);
     }
 
+    //Operações Avançadas
     public Numero Potencia(Numero base, Numero expoente) {
         double resultado = Math.pow(base.getValor(), expoente.getValor());
         return new NumeroImpl(resultado);
@@ -78,7 +85,43 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
         double resultado = (porcentagem.getValor() / 100) * valor.getValor();
         return new NumeroImpl(resultado);
     }
+    // ajustar
+    public Numero Exponencial(Numero base, Numero expoente) {
+        double resultado = Math.pow(base.getValor(), expoente.getValor());
+        return new NumeroImpl(resultado);
+    }  
+    
+    public Numero Seno(Numero numero) {
+        double resultado = Math.sin(numero.getValor());
+        return new NumeroImpl(resultado);
+    }
 
+    public Numero Cosseno(Numero numero) {
+        double resultado = Math.cos(numero.getValor());
+        return new NumeroImpl(resultado);
+    }
+
+    public Numero Tangente(Numero numero) {
+        double resultado = Math.tan(numero.getValor());
+        return new NumeroImpl(resultado);
+    }
+
+    public Numero Modulo(Numero numero) {
+        double resultado = Math.abs(numero.getValor());
+        return new NumeroImpl(resultado);
+    }
+
+    public Numero Fatorial(Numero numero) {
+        int valor = (int) numero.getValor();
+        int resultado = 1;
+
+        for (int i = 1; i <= valor; i++) {
+            resultado *= i;
+        }
+
+        return new NumeroImpl(resultado);
+    }
+    //
     public Numero RaizQuadrada(Numero numero) {
         double resultado = Math.sqrt(numero.getValor());
         return new NumeroImpl(resultado);
@@ -88,7 +131,6 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
         double resultado = Math.log(numero.getValor());
         return new NumeroImpl(resultado);
     }
-
 
 
 
