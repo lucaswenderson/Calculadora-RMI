@@ -21,8 +21,6 @@ public interface Calculadora extends Remote {
     
     Numero Porcentagem(Numero valor, Numero porcentagem) throws RemoteException;
     
-    Numero Exponencial(Numero base, Numero expoente) throws RemoteException;
-    
     Numero Seno(Numero numero) throws RemoteException;
     
     Numero Cosseno(Numero numero) throws RemoteException;

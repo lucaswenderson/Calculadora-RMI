@@ -15,6 +15,8 @@ public class ServidorCalculadora {
         
         String nomeServidor = args[0];
 
+        
+
         try {
             // Cria uma instância do gerenciador de repositórios
             GerenciadorRepositorios gerenciador = new GerenciadorRepositorios();

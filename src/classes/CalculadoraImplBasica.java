@@ -66,10 +66,6 @@ public class CalculadoraImplBasica extends UnicastRemoteObject implements Calcul
     }
 
     //Métodos avançados não suportados implementados apenas para satisfazer a interface
-    public Numero Exponencial(Numero base, Numero expoente) {
-        throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
-    }
-    
     public Numero Potencia(Numero base, Numero expoente) {
         throw new UnsupportedOperationException("Método avançado não suportado pela calculadora básica.");
     }

@@ -32,7 +32,6 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
         metodos.add("Potencia");
         metodos.add("RaizQuadrada");
         metodos.add("Logaritmo");
-        metodos.add("Exponencial");
         metodos.add("Seno");
         metodos.add("Cosseno");
         metodos.add("Tangente");
@@ -85,11 +84,6 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
         double resultado = (porcentagem.getValor() / 100) * valor.getValor();
         return new NumeroImpl(resultado);
     }
-    // ajustar
-    public Numero Exponencial(Numero base, Numero expoente) {
-        double resultado = Math.pow(base.getValor(), expoente.getValor());
-        return new NumeroImpl(resultado);
-    }  
     
     public Numero Seno(Numero numero) {
         double resultado = Math.sin(numero.getValor());
@@ -121,7 +115,7 @@ public class CalculadoraImplAvancada extends UnicastRemoteObject implements Calc
 
         return new NumeroImpl(resultado);
     }
-    //
+    
     public Numero RaizQuadrada(Numero numero) {
         double resultado = Math.sqrt(numero.getValor());
         return new NumeroImpl(resultado);
