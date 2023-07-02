@@ -8,7 +8,7 @@ import classes.CalculadoraImplBasica;
 
 public class ServidorCalculadora {
     public static void main(String args[]) {
-        if (args.length < 3) {
+        if (args.length < 2) {
             System.out.println("Uso: java ServidorCalculadora <nome_servidor> <porta>");
             System.exit(1);
         }
