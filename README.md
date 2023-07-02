@@ -1,4 +1,4 @@
-# README - Projeto Calculadora com RMI
+# Projeto Calculadora com RMI
 
 Este é um projeto de uma calculadora usando Remote Method Invocation (RMI) em Java. A calculadora permite realizar operações de soma, subtração, multiplicação, divisão e outras operações personalizadas fornecidas pelo cliente. O cliente se conecta ao servidor RMI para executar as operações de cálculo remotamente.
 
