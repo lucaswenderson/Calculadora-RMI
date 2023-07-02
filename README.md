@@ -46,13 +46,13 @@ rmiregistry
 1. Execute o servidor:
 
 ```shell
-java -classpath bin server.ServidorCalculadora <nome_servidor>
+java -classpath bin server.ServidorCalculadora <nome_servidor> <porta>
 ```
 
 1. Execute o cliente:
 
 ```shell
-java -classpath bin client.ClienteCalculadora <nome_repositorio>
+java -classpath bin client.ClienteCalculadora <nome_repositorio> <IP> <porta>
 ```
 
 ### Customização da Calculadora

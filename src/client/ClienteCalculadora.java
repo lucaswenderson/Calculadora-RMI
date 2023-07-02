@@ -15,17 +15,19 @@ import server.GerenciadorRepositorios;
 public class ClienteCalculadora {
     public static void main(String[] args) {
 
-        if (args.length < 1) {
-            System.out.println("Uso: java ClienteCalculadora <nome_repositorio>");
+        if (args.length < 3) {
+            System.out.println("Uso: java ClienteCalculadora <nome_repositorio> <IP> <porta>");
             System.out.println("Opções <nome_repositorio>: 'CalculadoraBasica' ou 'CalculadoraAvancada'");
             System.exit(1);
         }
         
         String repositorio = args[0];
+        String ip = args[1];
+        int porta = Integer.parseInt(args[2]);
 
         try {
             // Localiza o registro RMI
-            Registry registry = LocateRegistry.getRegistry("localhost", 1234);
+            Registry registry = LocateRegistry.getRegistry(ip, porta);
 
             // Obtém referência ao gerenciador de repositórios
             GerenciadorRepositorios gerenciador = (GerenciadorRepositorios) registry.lookup("GerenciadorRepositorios");

@@ -8,14 +8,13 @@ import classes.CalculadoraImplBasica;
 
 public class ServidorCalculadora {
     public static void main(String args[]) {
-        if (args.length < 1) {
-            System.out.println("Uso: java ServidorCalculadora <nome_servidor>");
+        if (args.length < 3) {
+            System.out.println("Uso: java ServidorCalculadora <nome_servidor> <porta>");
             System.exit(1);
         }
-        
-        String nomeServidor = args[0];
 
-        
+        String nomeServidor = args[0];
+        int porta = Integer.parseInt(args[1]);
 
         try {
             // Cria uma instância do gerenciador de repositórios
@@ -30,7 +29,7 @@ public class ServidorCalculadora {
             gerenciador.registrarRepositorio("CalculadoraAvancada", calculadoraAvancada);
 
             // Cria e exporta o registro RMI
-            Registry registry = LocateRegistry.createRegistry(1234);
+            Registry registry = LocateRegistry.createRegistry(porta);
 
             // Vincula o gerenciador de repositórios ao registro RMI
             registry.rebind("GerenciadorRepositorios", gerenciador);
